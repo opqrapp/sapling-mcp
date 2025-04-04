@@ -2,6 +2,9 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { spawn } from "child_process";
 
+// 상수 정의
+const COMMAND_TIMEOUT_MS = 120000; // 2 minutes
+
 // Schema definitions using Zod
 const SaplingStatus = z.object({
   repoPath: z.string(),
@@ -76,6 +79,10 @@ const SaplingPullRequestList = z.object({
   repoPath: z.string(),
 });
 
+const SaplingWeb = z.object({
+  repoPath: z.string(),
+});
+
 enum SaplingTools {
   STATUS = "sapling_status",
   DIFF_UNTRACKED = "sapling_diff_untracked",
@@ -93,6 +100,7 @@ enum SaplingTools {
   PUSH = "sapling_push",
   LAND = "sapling_land",
   PULL_REQUEST_LIST = "sapling_pull_request_list",
+  WEB = "sapling_web",
 }
 
 // Helper function to run Sapling commands
@@ -138,10 +146,16 @@ async function runSaplingCommand(
 
     // 타임아웃 설정 추가
     const timeout = setTimeout(() => {
-      console.error("[ERROR] Command timed out after 30 seconds");
+      console.error(
+        `[ERROR] Command timed out after ${COMMAND_TIMEOUT_MS / 1000} seconds`
+      );
       process.kill();
-      reject(new Error("Command timed out after 30 seconds"));
-    }, 30000);
+      reject(
+        new Error(
+          `Command timed out after ${COMMAND_TIMEOUT_MS / 1000} seconds`
+        )
+      );
+    }, COMMAND_TIMEOUT_MS);
 
     process.on("exit", () => {
       clearTimeout(timeout);
@@ -322,6 +336,13 @@ server.tool(
     };
   }
 );
+
+server.tool(SaplingTools.WEB, SaplingWeb.shape, async (args) => {
+  const result = await runSaplingCommand(args.repoPath, "web");
+  return {
+    content: [{ type: "text", text: result }],
+  };
+});
 
 // Export the server instance
 export { server as McpServer };
