@@ -306,6 +306,5 @@ server.tool(
   }
 );
 
-// Start receiving messages on stdin and sending messages on stdout
-const transport = new StdioServerTransport();
-await server.connect(transport);
+// Export the server instance
+export { server as McpServer };

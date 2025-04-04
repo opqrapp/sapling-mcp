@@ -1,15 +1,36 @@
 {
-  "name": "mcp-server-node",
+  "name": "@opqr/sapling-mcp",
   "version": "1.0.0",
   "type": "module",
-  "description": "MCP Server built in Node.js that demonstrates custom tools integration",
+  "description": "MCP Server for Sapling SCM - A Node.js implementation demonstrating custom tools integration",
   "main": "dist/mcp-server.js",
+  "types": "dist/mcp-server.d.ts",
+  "bin": {
+    "sapling-mcp": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "start": "node dist/mcp-server.js",
     "build": "tsc",
     "dev": "tsc -w",
     "lint": "eslint src/**/*.ts",
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "sapling",
+    "version-control",
+    "meta"
+  ],
+  "author": "Jaeho Lee",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opqrapp/sapling-mcp.git"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.8.0",
