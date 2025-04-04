@@ -1,5 +1,4 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import { spawn } from "child_process";
 
@@ -24,6 +23,7 @@ const SaplingDiff = z.object({
 const SaplingCommit = z.object({
   repoPath: z.string(),
   message: z.string(),
+  files: z.array(z.string()).optional(),
 });
 
 const SaplingAdd = z.object({
@@ -201,7 +201,8 @@ server.tool(SaplingTools.COMMIT, SaplingCommit.shape, async (args) => {
     args.repoPath,
     "commit",
     "-m",
-    args.message
+    args.message,
+    ...(args.files ? args.files : [])
   );
   return {
     content: [{ type: "text", text: result }],
