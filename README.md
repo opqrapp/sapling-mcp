@@ -5,7 +5,7 @@ A Node.js implementation of Model Context Protocol (MCP) server for Sapling SCM.
 ## Installation
 
 ```bash
-npm install @opqr/sapling-mcp
+npm install @opqrapp/sapling-mcp
 ```
 
 ## Usage
@@ -13,7 +13,7 @@ npm install @opqr/sapling-mcp
 You can run the MCP server directly using npx:
 
 ```bash
-npx @opqr/sapling-mcp
+npx @opqrapp/sapling-mcp
 ```
 
 ## Development
@@ -45,7 +45,7 @@ npm run dev
   "mcpServers": {
     "sapling": {
       "command": "npx",
-      "args": ["@opqr/sapling-mcp"],
+      "args": ["@opqrapp/sapling-mcp"],
       "type": "command"
     }
   }
@@ -57,4 +57,3 @@ Now you can select "Sapling MCP" as your MCP server in Cursor settings.
 ## License
 
 This MCP server is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository.
-

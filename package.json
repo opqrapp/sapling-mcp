@@ -1,5 +1,5 @@
 {
-  "name": "@opqr/sapling-mcp",
+  "name": "@opqrapp/sapling-mcp",
   "version": "1.0.0",
   "type": "module",
   "description": "MCP Server for Sapling SCM - A Node.js implementation demonstrating custom tools integration",
