@@ -28,7 +28,7 @@ const SaplingCommit = z.object({
 
 const SaplingAdd = z.object({
   repoPath: z.string(),
-  files: z.array(z.string()),
+  untrackedFiles: z.array(z.string()),
 });
 
 const SaplingRevert = z.object({
@@ -210,7 +210,11 @@ server.tool(SaplingTools.COMMIT, SaplingCommit.shape, async (args) => {
 });
 
 server.tool(SaplingTools.ADD, SaplingAdd.shape, async (args) => {
-  const result = await runSaplingCommand(args.repoPath, "add", ...args.files);
+  const result = await runSaplingCommand(
+    args.repoPath,
+    "add",
+    ...args.untrackedFiles
+  );
   return {
     content: [{ type: "text", text: result }],
   };

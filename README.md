@@ -52,7 +52,7 @@ npm run dev
 }
 ```
 
-Now you can select "Sapling MCP" as your MCP server in Cursor's AI settings.
+Now you can select "Sapling MCP" as your MCP server in Cursor settings.
 
 ## License
 
