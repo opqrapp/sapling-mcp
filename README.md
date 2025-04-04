@@ -45,8 +45,7 @@ npm run dev
   "mcpServers": {
     "sapling": {
       "command": "npx",
-      "args": ["@opqrapp/sapling-mcp"],
-      "type": "command"
+      "args": ["-y", "@opqrapp/sapling-mcp"]
     }
   }
 }
