@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "MCP Server Example": {
+      "command": "/opt/homebrew/bin/node",
+      "args": ["/Users/jaelee/prjs/sapling-mcp/dist/mcp-server.js"],
+      "env": {
+        "API_KEY": "abc-1234567890"
+      }
+    }
+  }
+} 
