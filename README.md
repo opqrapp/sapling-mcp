@@ -1,6 +1,6 @@
 # Sapling MCP Server
 
-A Node.js implementation of Model Context Protocol (MCP) server for Sapling SCM, demonstrating custom tools integration.
+A Node.js implementation of Model Context Protocol (MCP) server for Sapling SCM.
 
 ## Installation
 
