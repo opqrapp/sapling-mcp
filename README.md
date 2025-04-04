@@ -56,4 +56,5 @@ Now you can select "Sapling MCP" as your MCP server in Cursor's AI settings.
 
 ## License
 
-MIT
+This MCP server is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository.
+
