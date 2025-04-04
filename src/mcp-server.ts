@@ -40,6 +40,10 @@ const SaplingLog = z.object({
   maxCount: z.number().default(10),
 });
 
+const SaplingSmartLog = z.object({
+  repoPath: z.string(),
+});
+
 const SaplingBook = z.object({
   repoPath: z.string(),
   bookmarkName: z.string(),
@@ -80,6 +84,7 @@ enum SaplingTools {
   COMMIT = "sapling_commit",
   ADD_UNTRACKED = "sapling_add_untracked",
   REVERT = "sapling_revert",
+  SMART_LOG = "sapling_smart_log",
   LOG = "sapling_log",
   BOOK = "sapling_book",
   GOTO = "sapling_goto",
@@ -227,10 +232,17 @@ server.tool(SaplingTools.REVERT, SaplingRevert.shape, async (args) => {
   };
 });
 
+server.tool(SaplingTools.SMART_LOG, SaplingSmartLog.shape, async (args) => {
+  const result = await runSaplingCommand(args.repoPath, "smartlog");
+  return {
+    content: [{ type: "text", text: result }],
+  };
+});
+
 server.tool(SaplingTools.LOG, SaplingLog.shape, async (args) => {
   const result = await runSaplingCommand(
     args.repoPath,
-    "smartlog",
+    "log",
     "-l",
     args.maxCount.toString()
   );
