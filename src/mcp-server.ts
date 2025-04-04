@@ -74,11 +74,11 @@ const SaplingPullRequestList = z.object({
 
 enum SaplingTools {
   STATUS = "sapling_status",
-  DIFF_UNSTAGED = "sapling_diff_unstaged",
-  DIFF_CHANGED = "sapling_diff_staged",
+  DIFF_UNTRACKED = "sapling_diff_untracked",
+  DIFF_CHANGED = "sapling_diff_changed",
   DIFF = "sapling_diff_target",
   COMMIT = "sapling_commit",
-  ADD = "sapling_add",
+  ADD_UNTRACKED = "sapling_add_untracked",
   REVERT = "sapling_revert",
   LOG = "sapling_log",
   BOOK = "sapling_book",
@@ -160,7 +160,7 @@ server.tool(SaplingTools.STATUS, SaplingStatus.shape, async (args) => {
 });
 
 server.tool(
-  SaplingTools.DIFF_UNSTAGED,
+  SaplingTools.DIFF_UNTRACKED,
   SaplingDiffUnstaged.shape,
   async (args) => {
     const result = await runSaplingCommand(args.repoPath, "diff", "--unknown");
@@ -209,7 +209,7 @@ server.tool(SaplingTools.COMMIT, SaplingCommit.shape, async (args) => {
   };
 });
 
-server.tool(SaplingTools.ADD, SaplingAdd.shape, async (args) => {
+server.tool(SaplingTools.ADD_UNTRACKED, SaplingAdd.shape, async (args) => {
   const result = await runSaplingCommand(
     args.repoPath,
     "add",
