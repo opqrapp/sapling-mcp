@@ -182,7 +182,11 @@ server.tool(
   SaplingTools.DIFF_UNTRACKED,
   SaplingDiffUnstaged.shape,
   async (args) => {
-    const result = await runSaplingCommand(args.repoPath, "diff", "--unknown");
+    const result = await runSaplingCommand(
+      args.repoPath,
+      "status",
+      "--unknown"
+    );
     return {
       content: [{ type: "text", text: `Unstaged changes:\n${result}` }],
     };
@@ -193,15 +197,7 @@ server.tool(
   SaplingTools.DIFF_CHANGED,
   SaplingDiffStaged.shape,
   async (args) => {
-    const result = await runSaplingCommand(
-      args.repoPath,
-      "diff",
-      "--modified",
-      "--added",
-      "--removed",
-      "--deleted",
-      "--copies"
-    );
+    const result = await runSaplingCommand(args.repoPath, "diff");
     return {
       content: [{ type: "text", text: `Staged changes:\n${result}` }],
     };
